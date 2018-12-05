@@ -1,0 +1,21 @@
+{
+  "name": "mamatveev/yii2-sentry-logtarget",
+  "description": "Yii2 log target used Raven_Client (Sentry)",
+  "type": "library",
+  "require": {
+    "sentry/sentry": "^1.10"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mikhail Matveev",
+      "email": "m.matveev114@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "mamatveev\\yii2SentryLogTarget\\": "src/"
+    }
+  }
+}
