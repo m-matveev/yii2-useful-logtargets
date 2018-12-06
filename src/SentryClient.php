@@ -4,6 +4,21 @@ namespace mamatveev\yii2SentryLogTarget;
 
 class SentryClient extends \Raven_Client
 {
+    /**
+     * SentryClient constructor.
+     * @param null $options_or_dsn
+     * @param array $options
+     */
+    public function __construct($options_or_dsn = null, array $options = array())
+    {
+        parent::__construct($options_or_dsn, $options);
+        $this->serializer = new Serializer();
+    }
+
+
+    /**
+     * @param $data
+     */
     public function sanitize(&$data)
     {
         // attempt to sanitize any user provided data

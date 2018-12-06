@@ -14,6 +14,12 @@ class SentryLogTarget extends Target
      * @var string dsn for sentry access
      */
     public $dsn = '';
+
+    /**
+     * @var string
+     */
+    public $serializer = 'mamatveev\yii2SentryLogTarget\Serializer';
+
     /**
      * @var Raven_Client client for working with sentry
      */
@@ -28,9 +34,17 @@ class SentryLogTarget extends Target
     {
         parent::init();
         $this->client = new SentryClient($this->dsn);
+        $serializer = new $this->serializer();
+
+        if (!$serializer instanceof \Raven_Serializer) {
+            throw new \Exception('serializer should be instance of Raven_Serializer');
+        }
+
+        $this->client->setSerializer($serializer);
+
     }
 
-    /**
+    /*
      * Processes the given log messages.
      * This method will filter the given messages with [[levels]] and [[categories]].
      * And if requested, it will also export the filtering result to specific medium (e.g. email).
