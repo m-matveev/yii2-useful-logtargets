@@ -21,6 +21,12 @@ class SentryLogTarget extends Target
     public $serializer = 'mamatveev\yii2SentryLogTarget\Serializer';
 
     /**
+     * message length limit
+     * @var int
+     */
+    public $messageLimit = 3072;
+
+    /**
      * @var Raven_Client client for working with sentry
      */
     private $client = null;
@@ -34,7 +40,7 @@ class SentryLogTarget extends Target
     {
         parent::init();
         $this->client = new SentryClient($this->dsn);
-        $serializer = new $this->serializer();
+        $serializer = new $this->serializer(null, $this->messageLimit);
 
         if (!$serializer instanceof \Raven_Serializer) {
             throw new \Exception('serializer should be instance of Raven_Serializer');
@@ -46,7 +52,7 @@ class SentryLogTarget extends Target
 
     /*
      * Processes the given log messages.
-     * This method will filter the given messages with [[levels]] and [[categories]].
+     * This method will fil\Yii::$app->params['mts_mq_manager_name']ter the given messages with [[levels]] and [[categories]].
      * And if requested, it will also export the filtering result to specific medium (e.g. email).
      * @param array $messages log messages to be processed. See [[Logger::messages]] for the structure
      * of each message.
