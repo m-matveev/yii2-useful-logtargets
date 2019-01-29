@@ -19,6 +19,15 @@ class PayloadException extends \Exception
     protected $user = [];
 
     /**
+     * @param string $message
+     * @return PayloadException
+     */
+    public static function create(string $message)
+    {
+        return new PayloadException($message);
+    }
+
+    /**
      * @return array
      */
     public function getPayload(): array
