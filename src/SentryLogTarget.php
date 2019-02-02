@@ -87,9 +87,9 @@ class SentryLogTarget extends Target
                 'tags' => ['category' => $category],
             ];
 
-            if (isset(Yii::$app->user) && !Yii::$app->user->isGuest) {
-                $data['user'] = ['id' => \Yii::$app->user->id];
-            }
+//            if (isset(Yii::$app->user) && !Yii::$app->user->isGuest) {
+//                $data['user'] = ['id' => \Yii::$app->user->id];
+//            }
 
             if (is_array($msg)) {
                 $data = array_merge_recursive($data, $msg);
