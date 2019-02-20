@@ -1,6 +1,6 @@
 <?php
 
-namespace mamatveev\yii2SentryLogTarget;
+namespace mamatveev\yii2LogTargets;
 
 
 class Serializer extends \Raven_Serializer

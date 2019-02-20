@@ -1,5 +1,5 @@
 <?php
-namespace mamatveev\yii2SentryLogTarget;
+namespace mamatveev\yii2LogTargets;
 
 
 class SentryClient extends \Raven_Client
