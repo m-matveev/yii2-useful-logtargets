@@ -18,7 +18,7 @@ class SentryLogTarget extends Target
     /**
      * @var string
      */
-    public $serializer = 'mamatveev\yii2SentryLogTarget\Serializer';
+    public $serializer = 'mamatveev\yii2LogTargets\Serializer';
 
     /**
      * message length limit
