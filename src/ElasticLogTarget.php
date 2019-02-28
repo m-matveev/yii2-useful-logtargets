@@ -2,7 +2,6 @@
 namespace mamatveev\yii2LogTargets;
 
 
-use mamatveev\yii2SentryLogTarget\PayloadException;
 use yii\elasticsearch\ElasticsearchTarget;
 use yii\helpers\Json;
 use yii\helpers\VarDumper;
