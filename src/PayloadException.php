@@ -1,6 +1,8 @@
 <?php
 namespace mamatveev\yii2LogTargets;
 
+use yii\log\Logger;
+
 class PayloadException extends \Exception
 {
     /**
@@ -17,6 +19,11 @@ class PayloadException extends \Exception
      * @var array
      */
     protected $user = [];
+
+    /**
+     * @var int
+     */
+    protected $level = Logger::LEVEL_ERROR;
 
     /**
      * @param string $message
@@ -79,6 +86,24 @@ class PayloadException extends \Exception
     {
         $this->user = $user;
         return $this;
+    }
+
+    /**
+     * @param int $level
+     * @return $this
+     */
+    public function setLevel(int $level)
+    {
+        $this->level = $level;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevel() : int
+    {
+        return $this->level;
     }
 
 

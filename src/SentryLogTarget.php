@@ -103,6 +103,7 @@ class SentryLogTarget extends Target
                 if ($msg instanceof PayloadException) {
                     $data['tags'] = $msg->getTag();
                     $data['extra'] = $msg->getPayload();
+                    $data['level'] = Logger::getLevelName($msg->getLevel());
 
                     if (!isset($data['user'])) {
                         $data['user'] = $msg->getUser();
