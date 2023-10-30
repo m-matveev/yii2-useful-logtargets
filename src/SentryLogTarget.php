@@ -31,6 +31,13 @@ class SentryLogTarget extends Target
      */
     private $client = null;
 
+    protected static $eventIds = [];
+
+    public static function getSentryEventIds()
+    {
+        return static::$eventIds;
+    }
+
     /**
      * Initializes the DbTarget component.
      * This method will initialize the [[db]] property to make sure it refers to a valid DB connection.
@@ -47,7 +54,6 @@ class SentryLogTarget extends Target
         }
 
         $this->client->setSerializer($serializer);
-
     }
 
     /*
@@ -110,11 +116,12 @@ class SentryLogTarget extends Target
                     }
                 }
 
-                $this->client->captureException($msg, $data);
+                $eventId = $this->client->captureException($msg, $data);
             } else {
-                $this->client->capture($data);
+                $eventId = $this->client->capture($data);
             }
 
+            static::$eventIds[] = $eventId;
         }
     }
 }
