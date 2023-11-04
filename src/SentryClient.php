@@ -1,4 +1,5 @@
 <?php
+
 namespace mamatveev\yii2LogTargets;
 
 
@@ -14,7 +15,6 @@ class SentryClient extends \Raven_Client
         parent::__construct($options_or_dsn, $options);
         $this->serializer = new Serializer();
     }
-
 
     /**
      * @param $data
@@ -44,4 +44,25 @@ class SentryClient extends \Raven_Client
         }
     }
 
+    public function sanitize_encoding($data)
+    {
+        if (is_string($data)) {
+            return utf8_encode($data);
+        } elseif (is_array($data)) {
+            $ret = [];
+            foreach ($data as $i => $d) $ret[$i] = $this->sanitize_encoding($d);
+            return $ret;
+        } elseif (is_object($data)) {
+            foreach ($data as $i => $d) $data->$i = $this->sanitize_encoding($d);
+            return $data;
+        } else {
+            return $data;
+        }
+    }
+
+    public function encode(&$data)
+    {
+        $data = $this->sanitize_encoding($data);
+        return parent::encode($data);
+    }
 }
