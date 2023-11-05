@@ -47,7 +47,7 @@ class SentryClient extends \Raven_Client
     public function sanitize_encoding($data)
     {
         if (is_string($data)) {
-            return utf8_encode($data);
+            return mb_convert_encoding($data, 'UTF-8');
         } elseif (is_array($data)) {
             $ret = [];
             foreach ($data as $i => $d) $ret[$i] = $this->sanitize_encoding($d);
